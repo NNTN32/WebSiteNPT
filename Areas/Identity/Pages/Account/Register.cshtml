@@ -1,0 +1,242 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+@* <h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" placeholder="lastname" />
+                <label asp-for="Input.LastName">Last Name</label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" placeholder="firstname" />
+                <label asp-for="Input.FirstName">First Name</label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Address" class="form-control" autocomplete="address" aria-required="true" placeholder="address" />
+                <label asp-for="Input.Address">Address</label>
+                <span asp-validation-for="Input.Address" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Age" class="form-control" autocomplete="age" aria-required="true" placeholder="age" />
+                <label asp-for="Input.Age">Age</label>
+                <span asp-validation-for="Input.Age" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div> *@
+
+<section class="ezy__signup14 light d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+                <div class="ezy__signup14-form-card p-3">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="d-flex align-items-center justify-content-center h-100">
+                                <img src="https://i.pinimg.com/564x/40/08/7f/40087f74626202ae6b1b3eca7540f29a.jpg" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+                            <div class="d-flex flex-column justify-content-center align-items-center text-center h-100 p-2">
+                                <h2 class="ezy__signup14-heading">REGISTRATION FORM</h2>
+                                <form class="mt-4" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                    <div class="form-group d-flex mb-3">
+                                        
+                                        <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" placeholder="Lastname" />   
+                                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group position-relative mb-3">
+                                        
+                                        <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" placeholder="Firstname" />
+                                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group position-relative mb-3">
+                                       
+                                        <input asp-for="Input.Address" class="form-control" autocomplete="address" aria-required="true" placeholder="Address" />     
+                                        <span asp-validation-for="Input.Address" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group position-relative mb-3">
+                                        
+                                        <input asp-for="Input.Age" class="form-control" autocomplete="age" aria-required="true" placeholder="Age" />  
+                                        <span asp-validation-for="Input.Age" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group position-relative mb-3">
+                                       
+                                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Name@example.com" />   
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group position-relative mb-3">
+                                        
+                                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />  
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group position-relative mb-3">
+                                       
+                                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="ConfirmedPassword" />
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                    <button id="registerSubmit" type="submit" class="btn ezy__signup14-btn-submit mt-3">
+                                        Register <i class="fas fa-arrow-right"></i>
+                                    </button>
+
+                                    <div class="text-center mt-3">
+                                        <p class="mb-0 small">
+                                            Already have an account?
+                                            <a id="login" asp-area="Identity" asp-page="/Account/Login">Log In</a>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+.ezy__signup14 {
+  /* Bootstrap variables */
+  --bs-body-color: #1c1c1f;
+  --bs-body-bg: rgb(255, 255, 255);
+
+  /* Easy Frontend variables */
+  --ezy-theme-color: rgb(13, 110, 253);
+  --ezy-theme-color-rgb: 13, 110, 253;
+  --ezy-form-card-bg: #ffffff;
+  --ezy-form-card-shadow: 6px 0px 118px rgba(0, 0, 0, 0.08);
+
+  color: var(--bs-body-color);
+  background-image: url(https://cdn.easyfrontend.com/pictures/background/background4.jpg);
+  background-size: cover;
+  background-position: right;
+  padding: 60px 0;
+}
+
+.ezy__signup14-heading {
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--bs-body-color);
+}
+
+.ezy__signup14 img {
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.ezy__signup14-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+.ezy__signup14-form-card {
+  background-color: var(--ezy-form-card-bg);
+  box-shadow: var(--ezy-form-card-shadow);
+  border: none;
+}
+
+.ezy__signup14 .form-control,
+.ezy__signup14 .form-select {
+  min-height: 40px;
+  line-height: 40px;
+  border: none;
+  border-bottom: 1px solid var(--bs-body-color);
+  background-color: transparent;
+  color: var(--bs-body-color);
+  border-radius: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.ezy__signup14 .form-control:focus {
+  border-color: var(--ezy-theme-color);
+  box-shadow: none;
+}
+
+.ezy__signup14-btn-submit {
+  padding: 12px 40px;
+  background-color: #333333;
+  color: #ffffff;
+  border-radius: 0;
+}
+
+.ezy__signup14-btn-submit:hover {
+  color: #ffffff;
+}
+.ezy__signup14 a {
+  text-decoration: none;
+  color: var(--bs-body-color);
+}
+.ezy__signup14 a:hover {
+  text-decoration: underline;
+  color: var(--ezy-theme-color);
+}
+</style>

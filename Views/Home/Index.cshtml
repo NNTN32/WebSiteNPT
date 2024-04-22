@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebDACS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebsiteDACS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light text-bg-light">
+        <div class="container"></div>
+    </nav>
+    <section class="bodyshop">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="info">
+                        <h1>
+                            New brand, new shirt
+                            <p>Always lead<strong style="color:aquamarine"> the Model</strong></p>
+                        </h1>
+                        <p1 class="text-center-black">
+                            Quick to buy it!
+                        </p1>
+                        <p1 class="text-light" style="text-decoration:none"><button type="submit" class="btn btn-primary"><a href="#"></a>BUY NOW!</button></p1>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <img src="https://i.pinimg.com/564x/76/c7/6c/76c76c185006e3253a5ac493f06494b2.jpg" class="img1" alt="clothes" style="width: 1950, height:89" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <nav class="navbar navbar-expand-lg navbar-light text-bg-light">
+        <div class="container"></div>
+    </nav>
+
+    <section class="bodyshop2">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col">
+                    <img class="img2" src="https://i.pinimg.com/564x/87/d5/1c/87d51cb5a58438758e7fc8fc60515ea8.jpg" alt="shopview" style="width: 149, height: 39" />
+                </div>
+                <div class="col">
+                    <p2 class="inforshop">
+                        <h class="fw-bold">Reputable customer, reputable purchaser</h>
+                        <h2 class="fw-bold">Always the top choice</h2>
+                        <p3 class="text-light" style="text-decoration:none"><button type="submit" class="btn btn-info"><a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">SignIn</a></button></p3>
+                        <p4 class="text-light" style="text-decoration:none"><button type="submit" class="btn btn-info"><a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a></button></p4>
+                    </p2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - WebShopNPT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <button type="button"><img src="https://static.thenounproject.com/png/2331757-200.png" alt="scroll" style="width:59" height="54" onclick="topFunction()" id="myBtn" title="Go to top" /></button>
+    <style>
+        .info {
+            font-family: 'Times New Roman';
+            text-align: center;
+            padding-bottom: 64px;
+        }
+
+        #myBtn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed/sticky position */
+            bottom: 20px; /* Place the button at the bottom of the page */
+            right: 30px; /* Place the button 30px from the right */
+            z-index: 99; /* Make sure it does not overlap */
+            border: none; /* Remove borders */
+            outline: none; /* Remove outline */
+            background-color: cyan; /* Set a background color */
+            color: white; /* Text color */
+            cursor: pointer; /* Add a mouse pointer on hover */
+            padding: 15px; /* Some padding */
+            border-radius: 10px; /* Rounded corners */
+            font-size: 18px; /* Increase font size */
+        }
+
+            #myBtn:hover {
+                background-color: #555; /* Add a dark-grey background on hover */
+            }
+
+    </style>
+
+</body>
+</html>

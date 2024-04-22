@@ -1,0 +1,18 @@
+﻿@model WebShopNPT.Models.Product
+
+@{
+    ViewData["Title"] = "Display";
+}
+
+<h1>Product Details</h1>
+
+<div>
+    <h2>Product: @Model.Name</h2>
+    <p>Price: @Model.Price</p>
+    <p2>@Model.Description</p2>
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <img src="@Model.ImageUrl" alt="Product Images" style="max-width:120px; max-height:120px"/>
+    }
+</div>
+<a asp-action="IndexP"><button type="submit" class="btn btn-danger">Back to List</button></a>

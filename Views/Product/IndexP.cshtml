@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebShopNPT.Models.Product>
+
+@{
+    ViewData["Title"] = "IndexP";
+}
+
+<h1>Product</h1>
+
+<p>
+    <a asp-controller="Product" asp-action="Add"><button type="submit" class="btn btn-info">Add Product</button></a>
+    <a asp-controller="Category" asp-action="IndexC"><button type="submit" class="btn btn-info">Category</button></a>
+    <a asp-controller="Brand" asp-action="IndexB"><button type="submit" class="btn btn-info">Brand</button></a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name Product</th>
+            <th>Price</th>
+            <th>Describe</th>
+            <th>Discount</th>
+            <th>SKU</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Image Product</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Discount</td>
+                <td>@product.SKU</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.Brand?.BrandName</td>
+                <td>
+                    @if (product.ImageUrl != null)
+                    {
+
+                        <div class="gallery">
+                            <div class="img-w">
+                                <img src="@product.ImageUrl" alt="" style="max-width: 20%; max-height: 20%;" />
+                            </div>
+
+                        </div>
+                    }
+                    @if (product.Images != null)
+                    {
+
+                        <div class="gallery">
+                            <div class="img-w">
+                                <img src="@product.Images" alt="" style="max-width: 20%; max-height: 20%;" />
+                            </div>
+
+                        </div>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@product.Id"><button type="submit" class="btn btn-success">Update</button></a>
+                    <a asp-action="Display" asp-route-id="@product.Id"><button type="submit" class="btn btn-info">Display</button></a>
+                    <a asp-action="Delete" asp-route-id="@product.Id"><button type="submit" class="btn btn-danger">Delete</button></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+ 
+</table>

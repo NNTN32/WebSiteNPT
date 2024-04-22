@@ -1,0 +1,286 @@
+﻿@page
+@model LoginModel
+
+@* @{
+    ViewData["Title"] = "Log in";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form id="account" method="post">
+                <h2>Use a local account to log in.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                </div>
+                <div>
+                    <p>
+                        <a id="forgot-password" asp-page="/Account/ForgotPassword">Forgot your password?</a>
+                    </p>
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                    </p>
+                    <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to log in.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div> *@
+
+<section class="ezy__signin11 light d-flex">
+    <div class="container">
+        <div class="row justify-content-between h-100">
+            <div class="col-md-4 col-lg-6">
+                <div class="ezy__signin11-bg-holder d-none d-md-block h-100"
+                     style="background-image: url(https://i.pinimg.com/564x/2e/64/01/2e64018d582744e0b9aa40af80e43b0c.jpg)"></div>
+            </div>
+            <div class="col-md-8 col-lg-6 py-4">
+                <div class="px-4">
+                    <div class="card ezy__signin11-form-card">
+                        <div class="card-body p-md-5">
+                            <h2 class="ezy__signin11-heading mb-3">Welcome to NPTShop</h2>
+                            <p class="mb-4 mb-md-5">
+                                <span class="opacity-50 me-2">Don't have an account?</span>
+                                <a class="btn btn-link p-0 text-dark text-decoration-none" id="register" asp-area="Identity" asp-page="/Account/Register">Create account</a>
+                            </p>
+
+                            <form id="account" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                <div class="form-group mb-4 mt-2">
+                                    <label asp-for="Input.Email" class="form-label">Email</label>
+                                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2 mt-2">
+                                    <label asp-for="Input.Password" class="form-label">Password</label>
+                                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="form-check">
+                                        <label asp-for="Input.RememberMe" class="form-label">
+                                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                        </label>
+                                    </div>
+                                </div>
+                                <button id="login-submit" type="submit" class="btn ezy__signin11-btn-submit w-100">Log In</button>
+                                <button class="btn w-100" id="forgot-password" asp-page="./ForgotPassword">Forget your password?</button>
+
+                                <div class="position-relative ezy__signin11-or-separator">
+                                    <hr class="my-4 my-md-5" />
+                                    <span class="px-2">Or</span>
+                                </div>
+
+                                <button class="btn btn-primary ezy__signin11-btn w-100 d-flex align-items-center mb-3">
+                                    <span class="fab fa-facebook text-white fs-4"></span>
+                                    <span class="w-100 text-center text-white">Continue with Facebook</span>
+                                </button>
+                                <button class="btn btn-danger ezy__signin11-btn w-100 d-flex align-items-center">
+                                    <span class="fab fa-google text-white fs-4"></span>
+                                    <span class="w-100 text-center text-white">Continue with Google</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+.ezy__signin11 {
+  /* Bootstrap variables */
+  --bs-body-color: #333b7b;
+  --bs-body-bg: rgb(255, 255, 255);
+
+  /* Easy Frontend variables */
+  --ezy-theme-color: rgb(13, 110, 253);
+  --ezy-theme-color-rgb: 13, 110, 253;
+  --ezy-form-card-bg: #ffffff;
+  --ezy-form-card-shadow: 6px 0px 118px rgba(0, 0, 0, 0.08);
+
+  background-color: var(--bs-body-bg);
+  padding: 60px 0;
+}
+
+/* Gray Block Style */
+.gray .ezy__signin11,
+.ezy__signin11.gray {
+  /* Bootstrap variables */
+  --bs-body-bg: rgb(246, 246, 246);
+
+  /* Easy Frontend variables */
+  --ezy-form-card-bg: #f6f6f6;
+  --ezy-form-card-shadow: 6px 0px 118px rgba(20, 20, 20, 0.08);
+}
+
+/* Dark Gray Block Style */
+.dark-gray .ezy__signin11,
+.ezy__signin11.dark-gray {
+  /* Bootstrap variables */
+  --bs-body-color: #ffffff;
+  --bs-body-bg: rgb(30, 39, 53);
+  --bs-dark-rgb: 255, 255, 255;
+
+  /* Easy Frontend variables */
+  --ezy-form-card-bg: #2c3745;
+  --ezy-form-card-shadow: none;
+}
+
+/* Dark Block Style */
+.dark .ezy__signin11,
+.ezy__signin11.dark {
+  /* Bootstrap variables */
+  --bs-body-color: #ffffff;
+  --bs-body-bg: rgb(11, 23, 39);
+  --bs-dark-rgb: 255, 255, 255;
+
+  /* Easy Frontend variables */
+  --ezy-form-card-bg: #162231;
+  --ezy-form-card-shadow: none;
+}
+
+.ezy__signin11 .container {
+  min-height: 100vh;
+}
+
+.ezy__signin11-heading {
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 25px;
+  color: var(--bs-body-color);
+}
+
+.ezy__signin11-bg-holder {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 150px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.ezy__signin11-form-card {
+  background-color: var(--ezy-form-card-bg);
+  border: none;
+  box-shadow: var(--ezy-form-card-shadow);
+  border-radius: 15px;
+}
+
+.ezy__signin11-form-card * {
+  color: var(--bs-body-color);
+}
+
+.ezy__signin11 .form-control {
+  min-height: 48px;
+  line-height: 40px;
+  border-color: transparent;
+  background: rgba(163, 190, 241, 0.14);
+  border-radius: 10px;
+  color: var(--bs-body-color);
+}
+
+.ezy__signin11 .form-control:focus {
+  border-color: var(--ezy-theme-color);
+  box-shadow: none;
+}
+
+.ezy__signin11-btn-submit {
+  padding: 12px 30px;
+  background-color: #333b7b;
+  color: #ffffff;
+}
+
+.ezy__signin11-btn-submit:hover {
+  color: #ffffff;
+}
+
+.ezy__signin11-btn {
+  padding: 12px 30px;
+}
+
+.ezy__signin11-btn,
+.ezy__signin11-btn * {
+  color: #ffffff;
+}
+
+.ezy__signin11-btn:hover {
+  color: #ffffff;
+}
+
+.ezy__signin11-or-separator {
+  position: relative;
+}
+
+.ezy__signin11-or-separator hr {
+  border-color: var(--bs-body-color);
+  opacity: 0.15;
+}
+
+.ezy__signin11-or-separator span {
+  background-color: var(--ezy-form-card-bg);
+  color: var(--bs-body-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 0.8;
+}
+</style>

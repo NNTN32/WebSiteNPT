@@ -1,0 +1,15 @@
+﻿@model WebShopNPT.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<div>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <p>Are you sure you want to delete @Model.Name?</p>
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+    </form>
+    <a asp-action="IndexP"><button type="submit" class="btn btn-danger">Back To List</button></a>
+</div>

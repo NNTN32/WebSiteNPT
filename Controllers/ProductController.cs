@@ -4,6 +4,7 @@ using WebDACS.Repositories;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebShopNPT.Models;
 using Microsoft.AspNetCore.Authorization;
+using WebShopNPT.Areas.Admin.Models;
 
 namespace WebDACS.Controllers
 {
@@ -22,6 +23,7 @@ namespace WebDACS.Controllers
             brandR = brandRepository;
             _context = context;
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> IndexP()
         {
             var products = await productR.GetAllAsync();

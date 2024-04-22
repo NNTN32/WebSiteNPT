@@ -132,6 +132,11 @@
                                        
                                         <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="ConfirmedPassword" />
                                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </div class="form-group position-relative mb-3">
+                                    <div>
+                                        <select asp-for="Input.Role" asp-items="@Model.Input.RoleFirst" class="form-control">
+                                            <option disabled selected>-Select Role-</option>
+                                        </select>
                                     </div>
                                     <button id="registerSubmit" type="submit" class="btn ezy__signup14-btn-submit mt-3">
                                         Register <i class="fas fa-arrow-right"></i>

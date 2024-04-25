@@ -1,0 +1,73 @@
+﻿@model WebShopNPT.Models.Product;
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Details Product</h1>
+<style>
+    .product-details {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .product-info {
+        display: flex;
+    }
+
+    .product-image {
+        flex: 1;
+        margin-right: 20px;
+    }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    .no-image {
+        display: block;
+        text-align: center;
+        font-style: italic;
+        color: #999;
+    }
+
+    .product-description {
+        flex: 2;
+    }
+
+    .btn-back {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+</style>
+<div class="product-details">
+    <h2>@Model.Name</h2>
+    <div class="product-info">
+        <div class="product-image">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl" alt="Product Image" />
+            }
+            else
+            {
+                <span class="no-image">No Image Available</span>
+            }
+        </div>
+        <div class="product-description">
+            <h3>Price: @Model.Price</h3>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+    <a asp-action="IndexAdmin" class="btn-back">Back to List</a>
+</div>

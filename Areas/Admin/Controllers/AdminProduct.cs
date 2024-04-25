@@ -1,29 +1,28 @@
-﻿using WebShopNPT.Models;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebDACS.Repositories;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using WebShopNPT.Models;
-using Microsoft.AspNetCore.Authorization;
+using WebDACS.Repositories;
 using WebShopNPT.Areas.Admin.Models;
+using WebShopNPT.Models;
 
-namespace WebDACS.Controllers
+namespace WebShopNPT.Areas.Admin.Controllers
 {
-    public class ProductController : Controller
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+    public class AdminProduct : Controller
     {
         private readonly IProduct productR;
         private readonly ICategory categoryR;
         private readonly IBrand brandR;
         private readonly WebSiteDacsContext _context;
         private WebSiteDacsContext? context;
-
-        public ProductController(IProduct productRepository, ICategory categoryRepository, IBrand brandRepository)
+        public AdminProduct(IProduct productRepository, ICategory categoryRepository, IBrand brandRepository)
         {
             productR = productRepository;
             categoryR = categoryRepository;
             brandR = brandRepository;
         }
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> IndexP()
+        public async Task<IActionResult> IndexAdmin()
         {
             var products = await productR.GetAllAsync();
             var brand = await brandR.GetAllAsync();
@@ -31,7 +30,7 @@ namespace WebDACS.Controllers
             return View(products);
         }
 
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> CreateAdmin()
         {
             var categories = await categoryR.GetAllAsync();
             ViewBag.Categories = new SelectList(categories, "Id", "Name");
@@ -42,18 +41,17 @@ namespace WebDACS.Controllers
 
         // Xử lý thêm sản phẩm mới 
         [HttpPost]
-        public async Task<IActionResult> Add(Product product, IFormFile imageUrl)
+        public async Task<IActionResult> CreateAdmin(Product product, IFormFile imageUrl)
         {
             if (ModelState.IsValid)
             {
                 if (imageUrl != null)
                 {
-                    // Lưu hình ảnh đại diện tham khảo bài 02 hàm SaveImage 
                     product.ImageUrl = await SaveImage(imageUrl);
                 }
 
                 await productR.AddAsync(product);
-                return RedirectToAction(nameof(IndexP));
+                return RedirectToAction(nameof(IndexAdmin));
             }
             // Nếu ModelState không hợp lệ, hiển thị form với dữ liệu đã nhập 
             var categories = await categoryR.GetAllAsync();
@@ -63,20 +61,18 @@ namespace WebDACS.Controllers
             return View();
         }
 
-        // Viết thêm hàm SaveImage (tham khảo bài 02) 
-
         private async Task<string> SaveImage(IFormFile image)
         {
             var savePath = Path.Combine("wwwroot/images", image.FileName); // 
-            //Thay đổi đường dẫn theo cấu hình của bạn
-             using (var fileStream = new FileStream(savePath, FileMode.Create))
+                                                                           //Thay đổi đường dẫn theo cấu hình của bạn
+            using (var fileStream = new FileStream(savePath, FileMode.Create))
             {
                 await image.CopyToAsync(fileStream);
             }
             return "/images/" + image.FileName; // Trả về đường dẫn tương đối 
         }
-        // Hiển thị thông tin chi tiết sản phẩm
-        public async Task<IActionResult> Display(int id)
+
+        public async Task<IActionResult> DetailAdmin(int id)
         {
             var product = await productR.GetByIdAsync(id);
             if (product == null)
@@ -91,7 +87,7 @@ namespace WebDACS.Controllers
         }
 
         // Hiển thị form xác nhận xóa sản phẩm
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAdmin(int id)
         {
             var product = await productR.GetByIdAsync(id);
             if (product == null)
@@ -102,15 +98,15 @@ namespace WebDACS.Controllers
         }
 
         // Xử lý xóa sản phẩm
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> Delete1(int id)
+        [HttpPost, ActionName("DeleteAdmin")]
+        public async Task<IActionResult> DeleteP(int id)
         {
             await productR.DeleteAsync(id);
-            return RedirectToAction(nameof(IndexP));
+            return RedirectToAction(nameof(IndexAdmin));
         }
 
         // Hiển thị form cập nhật sản phẩm
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> UpdateAdmin(int id)
         {
             var product = await productR.GetByIdAsync(id);
             if (product == null)
@@ -126,7 +122,7 @@ namespace WebDACS.Controllers
 
         // Xử lý cập nhật sản phẩm
         [HttpPost]
-        public async Task<IActionResult> Update(int id, Product product, IFormFile imageUrl)
+        public async Task<IActionResult> UpdateAdmin(int id, Product product, IFormFile imageUrl)
         {
 
             ModelState.Remove("ImageUrl");
@@ -158,7 +154,7 @@ namespace WebDACS.Controllers
                 existingProduct.BrandId = product.BrandId;
 
                 await productR.UpdateAsync(existingProduct);
-                return RedirectToAction(nameof(IndexP));
+                return RedirectToAction(nameof(IndexAdmin));
             }
             var categories = await categoryR.GetAllAsync();
             ViewBag.Categories = new SelectList(categories, "Id", "Name", product.CategoryId);
@@ -166,6 +162,5 @@ namespace WebDACS.Controllers
             ViewBag.Brands = new SelectList(brands, "Id", "BrandName", product.BrandId);
             return View(product);
         }
-
     }
 }

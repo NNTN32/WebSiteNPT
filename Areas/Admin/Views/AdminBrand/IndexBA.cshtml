@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WebShopNPT.Models.Brand>
+
+@{
+    ViewData["Title"] = "IndexBA";
+}
+<h1>Brand</h1>
+
+<p1><button type="submit" class="btn-info" style="text-decoration: none"><a asp-controller="AdminBrand" asp-action="AddBA">Add Brand</a></button></p1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </td>
+                <td>
+                    <a asp-controller="AdminBrand" asp-action="DeleteBA" asp-route-id="@item.Id"><button type="submit" class="btn btn-danger">Delete</button></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="AdminProduct" asp-action="IndexAdmin"><button type="submit" class="btn btn-danger">Back to List</button></a>

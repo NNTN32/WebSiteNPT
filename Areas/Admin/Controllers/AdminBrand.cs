@@ -1,47 +1,52 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebDACS.Repositories;
+using WebShopNPT.Areas.Admin.Models;
 using WebShopNPT.Models;
 
-namespace WebDACS.Controllers
+namespace WebShopNPT.Areas.Admin.Controllers
 {
-    public class BrandController : Controller
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+    public class AdminBrand : Controller
     {
-       private readonly IProduct productR;
+        private readonly IProduct productR;
         private readonly IBrand brandR;
         private readonly WebSiteDacsContext _context;
-        private WebSiteDacsContext? context; 
+        private WebSiteDacsContext? context;
 
-        public BrandController(IProduct productRepository, IBrand brandRepository)
+        public AdminBrand(IProduct productRepository, IBrand brandRepository)
         {
             productR = productRepository;
             brandR = brandRepository;
             _context = context;
         }
-        public async Task<IActionResult> IndexB()
+        public async Task<IActionResult> IndexBA()
         {
             var brands = await brandR.GetAllAsync();
             return View(brands);
         }
-        public async Task<IActionResult> AddB()
+
+        public async Task<IActionResult> AddBA()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddB(Brand brand)
+        public async Task<IActionResult> AddBA(Brand brand)
         {
             if (ModelState.IsValid)
             {
                 await brandR.AddAsync(brand);
-                return RedirectToAction(nameof(IndexB));
+                return RedirectToAction(nameof(IndexBA));
             }
             var brands = await brandR.GetAllAsync();
             ViewBag.Brands = new SelectList(brands, "Id", "BrandName");
             return View(brand);
         }
 
-        public async Task<IActionResult> DeleteB(int id)
+        public async Task<IActionResult> DeleteBA(int id)
         {
             var brand = await brandR.GetByIdAsync(id);
             if (brand == null)
@@ -50,11 +55,11 @@ namespace WebDACS.Controllers
             }
             return View(brand);
         }
-        [HttpPost, ActionName("DeleteB")]
+        [HttpPost, ActionName("DeleteBA")]
         public async Task<IActionResult> Delete(int id)
         {
             await brandR.DeleteAsync(id);
-            return RedirectToAction(nameof(IndexB));
+            return RedirectToAction(nameof(IndexBA));
         }
     }
 }

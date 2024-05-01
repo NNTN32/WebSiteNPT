@@ -22,6 +22,7 @@ namespace WebDACS.Controllers
             categoryR = categoryRepository;
             brandR = brandRepository;
         }
+
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> IndexP()
         {
@@ -30,7 +31,6 @@ namespace WebDACS.Controllers
             ViewBag.Brands = await brandR.GetAllAsync();
             return View(products);
         }
-
         public async Task<IActionResult> Add()
         {
             var categories = await categoryR.GetAllAsync();

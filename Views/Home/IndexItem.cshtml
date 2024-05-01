@@ -1,0 +1,134 @@
+﻿@model IEnumerable<WebShopNPT.Models.Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+    int numOfQuantity = 1;
+}
+<link rel="stylesheet" href="~/css/Item.css" asp-append-version="true" />
+
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Place your sidebar content here -->
+                    <form>
+                        <div class="ezy__epgrid12-filter-content">
+                            <h5 class="mt-4">Sort By</h5>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="epgrid12-sort1" />
+                                <label class="form-check-label" for="epgrid12-sort1"> All Product </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="epgrid12-sort1" />
+                                <label class="form-check-label" for="epgrid12-sort1"> Jacket </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="epgrid12-sort2" checked />
+                                <label class="form-check-label" for="epgrid12-sort2"> Pants </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="epgrid12-sort3" />
+                                <label class="form-check-label" for="epgrid12-sort3"> Shirts </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="epgrid12-sort4" />
+                                <label class="form-check-label" for="epgrid12-sort4"> Socks </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="epgrid12-sort5" />
+                                <label class="form-check-label" for="epgrid12-sort5"> Price: Low to High </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="epgrid12-sort6" />
+                                <label class="form-check-label" for="epgrid12-sort6"> Price: High to Low </label>
+                            </div>
+                        </div>
+
+@*                         <hr class="ezy__epgrid12-divider my-4" />
+
+                        <div class="ezy__epgrid12-filter-content">
+                            <h5 class="mt-4 mb-3">Price</h5>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div>
+                                    <select class="form-select">
+                                        <option selected>Min Price</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="mx-2"><p class="mb-0 text-nowrap">--</p></div>
+                                <div>
+                                    <select class="form-select">
+                                        <option selected>Max Price</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> *@
+
+                        <hr class="ezy__epgrid12-divider my-4" />
+
+                        <div class="ezy__epgrid12-filter-content">
+                            <h5 class="mt-4">Brand</h5>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioColor" id="epgrid12-color1" />
+                                <label class="form-check-label" for="epgrid12-color1"> Nike </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioColor" id="epgrid12-color2" checked />
+                                <label class="form-check-label" for="epgrid12-color2"> Addidas </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" name="flexRadioColor" id="epgrid12-color3" />
+                                <label class="form-check-label" for="epgrid12-color3"> Essentials </label>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- Main Content -->
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl- justify-content-center">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col mb-5">
+                            <div class="card gap-3" style="width: 18rem">
+                                <h6 class="ezy__epgrid12-item-badge px-4 py-2 mb-0">@item.Discount%</h6>
+                                <img src="@item.ImageUrl" class="card-img-top" alt="..."
+                                     style="height: 300px">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        @Html.DisplayFor(modelItem =>
+                                                 item.Name)
+                                    </h5>
+                                    <div class="d-flex">
+                                        <span>Price: </span>
+                                        <p class="mx-3">@item.Price.ToString("#,##0") Vnđ</p>
+                                    </div>
+                                    <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-productId="@item.Id" asp-route-quantity="@numOfQuantity">
+                                        <button class="btn btn-outline-dark">
+                                            <i class="bi-cart-fill me-1"></i> Add to Cart
+                                        </button>
+                                    </a>
+@*                                     <form asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
+                                        <input type="hidden" name="productId" value="@item.Id" />
+                                        <label for="quantity">Số lượng:</label>
+                                        <input type="number" id="quantity" name="quantity" value="1" min="1" />
+                                        <button class="btn btn-info" type="submit">Add to Cart</button>
+                                    </form> *@
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

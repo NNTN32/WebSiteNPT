@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebDACS.Repositories;
 using WebShopNPT.Models;
@@ -20,6 +20,17 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = $"/Identity/Account/AccessDenied";
 });
 builder.Services.AddRazorPages();
+
+// Đặt trước AddControllersWithViews();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProduct, EFProductRepo>();
@@ -27,6 +38,7 @@ builder.Services.AddScoped<ICategory, EFCategoryRepo>();
 builder.Services.AddScoped<IBrand, EFBrandRepo>();
 var app = builder.Build();
 
+app.UseSession();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

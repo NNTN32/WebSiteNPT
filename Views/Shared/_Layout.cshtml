@@ -52,7 +52,9 @@
                              <li class="nav-item me-2">
                                  <form class="d-flex">
                                     <button class="btn ezy__nav5-btn px-3 bg-primary" type="submit">
-                                         <i class="bi-cart-fill-me-1"></i>
+                                         <i class="bi-cart-fill-me-1">
+                                             <a href="/Product/IndexItem"></a>
+                                         </i>
                                         <img src="https://icons.veryicon.com/png/o/commerce-shopping/e-commerce-website-icon/shopping-cart-164.png" alt="iconcart" style="width:21" height="21" />
                                      </button>
                                  </form>
@@ -76,8 +78,6 @@
                                         <li b-j9423yg996="">
                                             <a b-j9423yg996="" class="dropdown-item">
                                                 <a id="manage" class="nav-link text-light" title="Manage">
-                                                    @* @UserManager.GetUserName(User) *@
-                                                    @* Admin *@
                                                     @if (SignInManager.IsSignedIn(User)){
                                                          <li class="nav-item">
                                                             <a id="manage" class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)!</a>
@@ -133,6 +133,11 @@
                 <div class="row d-flex justify-content-between align-items-center">
                     <div class="col-lg-4">
                         <p class="mb-lg-0">NPT <strong style="color:aqua">Shop</strong><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs25M1V4Oda5OdE-wArUuroQA3PFlFXhvVFvKZXKQPgY550ooe50RqEAB5evQyMcIb8X4&usqp=CAU" style="width:42" height="52"/></p>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2"><img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-location-icon-png-image_1796660.jpg" alt="location" style="width:45" height="35" class="bg-black" /> HCM City</li>
+                            <li class="mb-2"><img src="https://cdn-icons-png.freepik.com/256/3687/3687004.png" alt="phone" style="width:45" height="35" /> 1900 6750</li>
+                            <li class="mb-2"><img src="https://cdn-icons-png.freepik.com/256/10505/10505856.png" alt="mail" style="width:45" height="35" /> npt@gmail.com</li>
+                        </ul>
                     </div>
                     <div class="col-lg-4">
                         <ul class="ezy__copyright6-nav nav justify-content-center">

@@ -20,3 +20,20 @@ function topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
+
+//$(document).ready(function){
+//    $('body').on('click', '.btnAddToCart', function (e)){
+        
+//        $.ajax({
+//            url: '/ShoppingCart/AddToCart',
+//            type: 'POST',
+//            data: { id: ProductID, quantity: Quantity },
+//            success: function (rs) {
+//                if (rs.success) {
+//                    $('#checkout_items').html(rs.Count);
+//                    alert(rs.msg);
+//                }
+//            }
+//        });
+//    });
+//});

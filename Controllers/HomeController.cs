@@ -26,6 +26,12 @@ namespace WebShopNPT.Controllers
             return View(products);
         }
 
+        public async Task<IActionResult> IndexShop()
+        {
+            var products = await productR.GetAllAsync();
+            return View(products);
+        }
+
         public IActionResult Privacy()
         {
             return View();

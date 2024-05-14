@@ -7,7 +7,7 @@ namespace WebShopNPT.Models
         public int Id { get; set; }
         [Required, StringLength(100)]
         public string Name { get; set; }
-        [Range(0.01, 10000.00)]
+        [Range(0.001, 100.000)]
         public decimal Price { get; set; }
         public string Description { get; set; }
         public float Discount { get; set; }

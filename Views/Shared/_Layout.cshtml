@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@{
+    var totalQuantity = ViewBag.TotalQuantity;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +36,7 @@
                     
                     <div class="collapse navbar-collapse" id="ezy_nav4-navbar-text">
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 mt-4 mt-lg-0">
                                 <li class="nav-item"><a class="navbar-brand" href="/Home">Home</a></li>
                                 <li class="nav-item">
                                     <a class="nav-link text-light" href="#">Clothes</a>
@@ -45,19 +48,17 @@
                                     <a class="nav-link" href="#">Contact</a>
                                 </li>
                             </ul>
-
                         </div>
 
                         <ul class="navbar-nav flex-row mb-2 mb-lg-0">
                              <li class="nav-item me-2">
-                                 <form class="d-flex">
+                                <a class="d-flex" href="/ShoppingCart">
                                     <button class="btn ezy__nav5-btn px-3 bg-primary" type="submit">
-                                         <i class="bi-cart-fill-me-1">
-                                             <a href="/Product/IndexItem"></a>
-                                         </i>
-                                        <img src="https://icons.veryicon.com/png/o/commerce-shopping/e-commerce-website-icon/shopping-cart-164.png" alt="iconcart" style="width:21" height="21" />
-                                     </button>
-                                 </form>
+                                        <i class="bi-cart-fill me-1">
+                                            <span class="checkout_item rounded-circle text-decoration-none align-items-center justify-content-center" style="color:ghostwhite top:-5px; left:15px; height:20px; min-width:20px">@totalQuantity</span>
+                                        </i>
+                                    </button>
+                                </a>
                              </li>
                             <li class="nav-item">
                                 <button class="btn btn-light px-3" type="button" data-bs-toggle="collapse"
@@ -109,7 +110,7 @@
                     <div class="collapse w-100" id="collapseExample">
                         <form class="mt-4">
                             <div class="input-group">
-                                <input class="form-control px-3" type="search" placeholder="Product" aria-label="Search" />
+                                <input class="form-control px-3 bg-emphasis" type="search" placeholder="Product" aria-label="Search" />
                                 <button class="btn ezy__nav5-btn px-3 bg-primary" type="submit">Search</button>
                             </div>
                         </form>

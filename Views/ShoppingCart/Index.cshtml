@@ -6,30 +6,102 @@
     int numOfQuantity = 1;
 }
 
-<h2>My Shopping Cart</h2>
+    <link rel="stylesheet" href="~/css/IndexCart.css" asp-append-version="true" />
+    <section class="ezy__eporder2 gray">
+        <div class="container py-5">
+            <div class="row justify-content-between">
+                <!-- progress bar -->
+                <div class="col-12">
+                    <div class="ezy__eporder2-progress d-flex justify-content-between position-relative mb-5">
+                        <span class="ezy__eporder2-cart active">1</span>
+                        <span class="ezy__eporder2-bill">2</span>
+                        <span class="ezy__eporder2-completed">3</span>
+                    </div>
+                </div>
+                
+                <!-- courses -->
+                <div class="col-12 col-md-6">
+                  <div class="card mt-4">
+                    <table class="table">
+                        <tr>
+                            <th>Describe</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td><img src="@item.ImageUrl" alt="" class="img-thumbnail" style="width: 100px; height: auto;"></td>
+                                <td>@item.Name</td>
+                                <td>@item.Price</td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm" asp-controller="ShoppingCart" asp-action="Increase" asp-route-id="@item.ProductId">+</a>
+                                    <input type="text" id="quantity" name="quantity" value="@item.Quantity" autocomplete="off" style="width: 28px" />
+                                    <a class="btn btn-success btn-sm" asp-controller="ShoppingCart" asp-action="Decrease" asp-route-id="@item.ProductId">-</a>
+                                </td>
+                                <td>
+                                    <a>@Model.Items.Where(x => x.ProductId == item.ProductId).Sum(x => x.Quantity * x.Price)</a>
+                                    <p class="ezy__eporder2-price mb-0">
+                                        <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId">
+                                            <button type="submit" class="btn btn-emphasis">
+                                                <img src="https://banner2.cleanpng.com/20191230/weo/transparent-trash-icon-bin-icon-pollution-icon-5e0a20e261c162.5470446815777220824004.jpg" alt="icontrashcan" style="width:35px" , height="30px" />
+                                            </button>
+                                        </a>
+                                    </p>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                  </div>
+                </div>
+              
+                <!-- details -->
+                <div class="col-12 col-md-5">
+                    <div class="ezy__eporder2-details p-4 p-lg-5 mt-4 rounded">
+                        <h4 class="mb-5">Your Order</h4>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6 class="mb-0">Product</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="mb-0">Price</p>
+                            </div>
 
-<table class="table">
-    <tr>
-        <th>Decribe</th>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Total</th>
-    </tr>
-    @foreach(var item in Model.Items)
-    {
-        <tr>
-            <td><img src="@item.ImageUrl" alt="" class="img-thumbnail" style="width: 100px; height: auto;"></td>    
-            <td>@item.Name</td>
-            <td><input type="number" id="quantity" name="quantity" value="@item.Quantity" /></td>
-            <td>@item.Price</td> 
-            <td>@(item.Price * item.Quantity)</td> 
-            <td>
-                <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId"><button type="submit" class="btn btn-danger">Remove</button></a>
-            </td> 
-        </tr>
-    }
-</table>
-<button type="submit" class="btn btn-info"><a href="/ShoppingCart/Checkout" style="text-decoration:none">Checkout</a></button>
+                            <hr class="my-4" />
 
-<button type="submit" class="btn btn-danger"><a href="/Home/IndexItem" style="text-decoration:none">Back to List</a></button>
+                            <div class="col-8">
+                                <h6 class="mb-0">@Model.Items.Sum(p=> p.Quantity).ToString()</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="mb-0"> @Model.Items.Sum(p=> p.Price).ToString() vnd</p>
+                            </div>
+
+                            <hr class="my-4" />
+
+                            <div class="col-8">
+                                <h6 class="mb-0">Subtotal</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="mb-0">
+                                    @Model.Items.Sum(x => x.Quantity * x.Price).ToString() vnd
+                                </p>
+                            </div>
+
+                            <form action="" class="mt-5">
+@*                                 <div class="input-group">
+                                    <input class="form-control" type="search" placeholder="Enter coupon" aria-label="Search" />
+                                    <button class="btn ezy__eporder2-btn" type="submit">Apply</button>
+                                </div> *@
+                               <button type="submit" class="btn btn-primary"><a href="/ShoppingCart/Checkout" style="text-decoration:none" class="text-light">Proceed To Checkout</a></button>
+                               <button type="submit" class="btn btn-danger"><a href="/Home/IndexItem" style="text-decoration:none" class="text-light">Continue Buying</a></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+              
+
+            </div>
+        </div>
+    </section>

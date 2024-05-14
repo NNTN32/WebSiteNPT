@@ -19,5 +19,6 @@
         {
             Items.RemoveAll(i => i.ProductId == productId);
         }
+
     }
 }

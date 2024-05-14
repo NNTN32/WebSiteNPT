@@ -4,5 +4,33 @@
 *@
 @{
 }
-<h2>Order Completed</h2>
-<p>Your order with ID @Model has been placed successfully.</p>
+@* <h2>Order Completed</h2>
+<p>Your order with ID @Model has been placed successfully.</p> *@
+
+<link rel="stylesheet" href="~/css/OrderComplete.css" asp-append-version="true" />
+<section class="ezy__eporder4 gray">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <!-- progress bar -->
+            <div class="col-12">
+                <div class="ezy__eporder4-progress d-flex justify-content-between position-relative mb-5">
+                    <span class="ezy__eporder4-cart active">1</span>
+                    <span class="ezy__eporder4-bill active">2</span>
+                    <span class="ezy__eporder4-completed active">3</span>
+                </div>
+            </div>
+            <div class="card border-0 py-5 mt-4">
+                <div class="card-body text-center py-md-5">
+                    <div class="ezy__eporder4-check">
+                        <i class="fas fa-check"><img src="https://icons.veryicon.com/png/o/miscellaneous/monochromatic-surface-icon-library/success-56.png" alt="icon" style="width:50px" , height="50px" /></i>
+                    </div>
+                    <h1 class="ezy__eporder4-heading my-3">Your Order is Successful</h1>
+                    <p class="ezy__eporder4-sub-heading">
+                        Your order with ID @Model has been placed successfully.
+                    </p>
+                    <button class="btn ezy__eporder4-btn mt-4"><a href="/Home/Index" style="text-decoration:none" class="text-light">Back To Course</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

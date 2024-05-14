@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebDACS.Repositories;
+using WebShopNPT.EFRepository;
 using WebShopNPT.Models;
+using WebShopNPT.Repositories;
+using WebShopNPT.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +39,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProduct, EFProductRepo>();
 builder.Services.AddScoped<ICategory, EFCategoryRepo>();
 builder.Services.AddScoped<IBrand, EFBrandRepo>();
+builder.Services.AddScoped<IOrder, EFOrderRepo>();
+builder.Services.AddSingleton<IVnPayService, VnPayService>();
 var app = builder.Build();
 
 app.UseSession();
